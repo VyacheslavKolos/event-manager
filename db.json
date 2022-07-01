@@ -1,0 +1,36 @@
+{
+  "timezones":[
+    {
+      "id":0,
+      "name": "Eastern Time - EDT",
+      "value": "America/New_York",
+      "offset": "GMT-0400"
+    },
+    {
+      "id":1,
+      "name":"Eastern European Time",
+      "value":"Europe/Helsinki",
+      "offset": "GMT+0300"
+    },
+    {
+      "id":2,
+      "name":"Central Europen Time",
+      "value":"Europe/Berlin",
+      "offset": "GMT+0200"
+    },
+    {
+      "id":3,
+      "name": "UTC",
+      "value": "UTC",
+      "offset": "GMT+0000"
+    }
+  ],
+  "comments": [
+    {
+      "id": 3,
+      "productId": 1,
+      "description": "some text here",
+      "date": "14:00 22.08.2021"
+    }
+  ]
+}
