@@ -6,6 +6,8 @@ import earthIcon from '../assets/icons/Vector_Stroke.png';
 import TimezoneList from "./TimezoneList";
 
 const Navbar: FC = () => {
+
+
     return (
         <div>
             <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>

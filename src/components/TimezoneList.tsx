@@ -31,6 +31,7 @@ const TimezoneList = () => {
         setAnchorEl(null);
     };
 
+
     return (
         <Stack direction={'row'} alignItems={'center'}>
 
@@ -45,7 +46,7 @@ const TimezoneList = () => {
                 {open ? <ExpandLess/> : <ExpandMore/>}
                 <Typography fontFamily={'Montserrat'} fontStyle={'normal'} fontWeight={500} fontSize={'18px'}
                             color={'#000000'} lineHeight={'22px'}>
-                    Central European Time
+                    { timezones[0]?.name}
                 </Typography>
             </Button>
             <Menu
@@ -57,9 +58,12 @@ const TimezoneList = () => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+
+                {timezones.map((timezone)=>(
+                    <MenuItem key={timezone.id} onClick={handleClose}>
+                        {timezone.name}
+                    </MenuItem>
+                ))}
             </Menu>
         </Stack>
     );
