@@ -1,15 +1,17 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {ITimezone} from "../../interfaces";
+import {IEvent, ITimezone} from "../../interfaces";
 import {recordService} from "../../services";
 
 interface IRecordsState {
     timezones: ITimezone[],
+    events: IEvent[],
     errors: object
 }
 
 const initialState: IRecordsState = {
     timezones: [],
+    events: [],
     errors: []
 }
 
@@ -17,8 +19,20 @@ export const getAllTimezones = createAsyncThunk(
     'recordSlice/getAllTimezones',
     async (_, {dispatch, rejectWithValue}) => {
         try {
-            const {data} = await recordService.getAll()
+            const {data} = await recordService.getAllTimezones()
             dispatch(setTimezones({timezones: data}))
+        } catch (e: any) {
+            return rejectWithValue(e.message);
+        }
+    }
+)
+
+export const getAllEvents = createAsyncThunk(
+    'recordSlice/getAllEvents',
+    async (_, {dispatch, rejectWithValue}) => {
+        try {
+            const {data} = await recordService.getAll()
+            dispatch(setEvents({events: data}))
         } catch (e: any) {
             return rejectWithValue(e.message);
         }
@@ -33,13 +47,23 @@ export const productSlice = createSlice({
         setTimezones: ((state, action: PayloadAction<{ timezones: ITimezone[] }>) => {
             state.timezones = action.payload.timezones;
         }),
+        setEvents: ((state, action: PayloadAction<{ events: IEvent[] }>) => {
+            state.events = action.payload.events;
+        }),
     },
-    extraReducers: {}
+    extraReducers: {
+        [getAllTimezones.rejected.toString()]: (state: any, action: PayloadAction<string>) => {
+            state.errors = action.payload
+        },
+        [getAllEvents.rejected.toString()]: (state: any, action: PayloadAction<string>) => {
+            state.errors = action.payload
+        },
+    }
 
 })
 
 const recordReducer = productSlice.reducer;
 export default recordReducer;
 
-export const {setTimezones} = productSlice.actions;
+export const {setTimezones, setEvents} = productSlice.actions;
 

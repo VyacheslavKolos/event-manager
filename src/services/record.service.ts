@@ -1,8 +1,9 @@
 import {axiosService} from "./axios.service";
 
-import {ITimezone} from "../interfaces";
+import {IEvent, ITimezone} from "../interfaces";
 import {urls} from "../constants";
 
 export const recordService = {
-    getAll: () => axiosService.get<ITimezone[]>(urls.timezones),
+    getAllTimezones: () => axiosService.get<ITimezone[]>(urls.timezones),
+    getAll:()=>axiosService.get<IEvent[]>(urls.events)
 }

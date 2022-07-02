@@ -4,4 +4,5 @@ export default baseURL;
 
 export const urls={
     timezones:'/timezones',
+    events:'/events'
 }
