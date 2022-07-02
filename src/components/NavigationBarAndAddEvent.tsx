@@ -14,8 +14,8 @@ const NavigationBarAndAddEvent = () => {
                        bgcolor={'#E9E9E9'}
                        p={'12px'}>
                     <Stack direction={'row'} gap={'30px'} alignItems={'center'} justifyContent={'center'}>
-                        <Button variant="contained">Contained</Button>
-                        <Button variant="contained">Contained</Button>
+                        <Button variant="contained">Published</Button>
+                        <Button variant="contained">Unpublished</Button>
                     </Stack>
                 </Stack>
 
