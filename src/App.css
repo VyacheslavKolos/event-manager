@@ -1,0 +1,15 @@
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #FFFAFB;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+.publish{
+    text-decoration: none;
+}
