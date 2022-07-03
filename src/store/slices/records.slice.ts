@@ -39,6 +39,14 @@ export const getAllEvents = createAsyncThunk(
     }
 )
 
+export const createEventThunk = createAsyncThunk<void, { event: IEvent }>(
+    'recordSlice/createEventThunk',
+    async ({event}, {dispatch}) => {
+        const {data} = await recordService.create(event);
+        dispatch(addEvent({event: data}))
+    }
+)
+
 
 export const productSlice = createSlice({
     name: 'recordSlice',
@@ -50,6 +58,9 @@ export const productSlice = createSlice({
         setEvents: ((state, action: PayloadAction<{ events: IEvent[] }>) => {
             state.events = action.payload.events;
         }),
+        addEvent: ((state, action: PayloadAction<{ event: IEvent }>) => {
+            state.events.push(action.payload.event)
+        }),
     },
     extraReducers: {
         [getAllTimezones.rejected.toString()]: (state: any, action: PayloadAction<string>) => {
@@ -58,6 +69,7 @@ export const productSlice = createSlice({
         [getAllEvents.rejected.toString()]: (state: any, action: PayloadAction<string>) => {
             state.errors = action.payload
         },
+
     }
 
 })
@@ -65,5 +77,5 @@ export const productSlice = createSlice({
 const recordReducer = productSlice.reducer;
 export default recordReducer;
 
-export const {setTimezones, setEvents} = productSlice.actions;
+export const {setTimezones, setEvents, addEvent} = productSlice.actions;
 

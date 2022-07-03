@@ -3,6 +3,7 @@ import {Box, Stack} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getAllEvents} from "../store/slices";
 import {IEvent} from "../interfaces";
+import EventCard from "./EventCard";
 
 const EventList: FC<{ filterPublished: boolean; }> = ({filterPublished}) => {
 
@@ -22,16 +23,16 @@ const EventList: FC<{ filterPublished: boolean; }> = ({filterPublished}) => {
             setUnPublishedEvents(events.filter(e => !e.isPublished))
             setPublishedEvents([]);
         }
-    }, [filterPublished])
+    }, [filterPublished, events])
 
 
     return (
         <Box mt={'44px'}>
-            <Stack>
+            <Stack direction={'row'} flexWrap={'wrap'} gap={'82px'}>
                 {filterPublished ? publishedEvents.map(event=>(
-                    event.title
+                    <EventCard key={event.id} event={event}/>
                 )) : unPublishedEvents.map(event=>(
-                    event.title
+                    <EventCard key={event.id} event={event}/>
                 ))}
             </Stack>
         </Box>

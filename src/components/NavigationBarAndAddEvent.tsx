@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import ActiveButton from "./ActiveButton";
 import InActiveButton from "./InActiveButton";
+import {AddDialogWindow} from "./AddDialogWindow";
 
 interface IProps {
     (bool: boolean): void;
@@ -47,15 +48,8 @@ const NavigationBarAndAddEvent : FC<{ setFilterPublished: IProps}> = ({setFilter
                     </Stack>
                 </Stack>
 
+                <AddDialogWindow/>
 
-                <Button variant="contained" color="success"
-                        sx={{width: '233px', height: '69px', bgcolor: '#4ADE80', borderRadius: '57px'}}>
-                    <Stack alignItems={'center'} justifyContent={'center'} direction={'row'} gap={'20px'}>
-                        <AddIcon/>
-                        <Typography fontFamily={'Montserrat'} fontStyle={'normal'} fontWeight={600} fontSize={'24px'}
-                                    color={'#FFFFFF'} lineHeight={'29px'} textTransform={'none'}>Add Event</Typography>
-                    </Stack>
-                </Button>
             </Stack>
 
 
