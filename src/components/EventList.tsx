@@ -6,8 +6,8 @@ import {IEvent} from "../interfaces";
 
 const EventList: FC<{ filterPublished: boolean; }> = ({filterPublished}) => {
 
-    const [publishedTasks, setPublishedTasks] = useState<IEvent[]>([]);
-    const [unPublishedTasks, setUnPublishedTasks] = useState<IEvent[]>([]);
+    const [publishedEvents, setPublishedEvents] = useState<IEvent[]>([]);
+    const [unPublishedEvents, setUnPublishedEvents] = useState<IEvent[]>([]);
 
     const dispatch = useAppDispatch();
 
@@ -16,11 +16,11 @@ const EventList: FC<{ filterPublished: boolean; }> = ({filterPublished}) => {
     useEffect(() => {
         dispatch(getAllEvents());
         if (filterPublished) {
-            setPublishedTasks(events.filter(e => e.isPublished))
-            setUnPublishedTasks([]);
+            setPublishedEvents(events.filter(e => e.isPublished))
+            setUnPublishedEvents([]);
         } else {
-            setUnPublishedTasks(events.filter(e => !e.isPublished))
-            setPublishedTasks([]);
+            setUnPublishedEvents(events.filter(e => !e.isPublished))
+            setPublishedEvents([]);
         }
     }, [filterPublished])
 
@@ -28,7 +28,11 @@ const EventList: FC<{ filterPublished: boolean; }> = ({filterPublished}) => {
     return (
         <Box mt={'44px'}>
             <Stack>
-
+                {filterPublished ? publishedEvents.map(event=>(
+                    event.title
+                )) : unPublishedEvents.map(event=>(
+                    event.title
+                ))}
             </Stack>
         </Box>
     );
