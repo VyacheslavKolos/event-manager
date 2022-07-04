@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Button, Menu, Typography} from "@mui/material";
+import {Button, Menu, Stack, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import DeleteCard from "./DeleteCard";
 
@@ -8,6 +8,10 @@ import {PublishEventThunk} from "../store/slices";
 import {IEvent} from "../interfaces";
 
 import EditEvent from "./EditEvent";
+import PublishIcon from '@mui/icons-material/Publish';
+
+// @ts-ignore
+import Unpublish from '../assets/icons/UnPublishIcon.png';
 
 interface IProps {
     event: IEvent
@@ -60,11 +64,13 @@ const CardMenu: FC<IProps> = ({event}) => {
                 }}
             >
 
-                {/*<MenuItem onClick={handleCloseMenu} sx={{gap:'8px', p:'0px'}}>*/}
-                <MenuItem  sx={{gap: '8px', p: '0px'}}>
-                    <EditEvent/>
+                <MenuItem sx={{gap: '8px', p: '0px'}}>
+                    <EditEvent id={event.id}/>
                 </MenuItem>
-                <MenuItem onClick={handleCloseMenuPublish}>{isPublished ? 'Unpublish' : 'Publish'}</MenuItem>
+                <MenuItem sx={{gap: '8px', pl: '4px'}} onClick={handleCloseMenuPublish}>{isPublished ?
+                    <Stack direction={'row'} gap={'8px'}><img
+                        src={Unpublish} alt="unpublish"/>Unpublish</Stack> :
+                    <Stack direction={'row'} gap={'8px'}><PublishIcon/>Publish</Stack>}</MenuItem>
                 <DeleteCard id={event.id}/>
             </Menu>
         </div>);

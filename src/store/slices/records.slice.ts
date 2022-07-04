@@ -6,14 +6,14 @@ import {recordService} from "../../services";
 interface IRecordsState {
     timezones: ITimezone[],
     events: IEvent[],
-    isPublished:boolean
-    errors: object
+    isPublished: boolean
+    errors: object,
 }
 
 const initialState: IRecordsState = {
     timezones: [],
     events: [],
-    isPublished:false,
+    isPublished: false,
     errors: []
 }
 
@@ -59,32 +59,32 @@ export const deleteEventThunk = createAsyncThunk<void, { id: number }>(
     }
 )
 
-export const PublishEventThunk = createAsyncThunk<void, { id: number, event:IEvent }>(
+export const PublishEventThunk = createAsyncThunk<void, { id: number, event: IEvent }>(
     'recordSlice/PublishEventThunk',
-    async ({id,event}, {dispatch}) => {
-        const newEvent= {
+    async ({id, event}, {dispatch}) => {
+        const newEvent = {
             title: event.title,
             time: event.time,
             isPublished: !event.isPublished,
             id
         }
-            await recordService.publishEvent(id,newEvent)
-        dispatch(publishEvent({event:newEvent}))
+        await recordService.publishEvent(id, newEvent)
+        dispatch(publishEvent({event: newEvent}))
     }
 )
 
-export const EditEventThunk = createAsyncThunk<void, { id: number, event:IEvent }>(
+export const EditEventThunk = createAsyncThunk<void, { id: number, event: IEvent }>(
     'recordSlice/EditEventThunk',
-    async ({id,event}, {dispatch}) => {
-        const newEvent= {
+    async ({id, event}, {dispatch}) => {
+        const newEvent = {
             title: event.title,
             time: event.time,
             isPublished: event.isPublished,
             id
         }
         console.log(newEvent);
-        // await recordService.publishEvent(id,newEvent)
-        // dispatch(publishEvent({event:newEvent}))
+        await recordService.editEvent(id, newEvent)
+        dispatch(publishEvent({event: newEvent}))
     }
 )
 
@@ -96,7 +96,11 @@ export const productSlice = createSlice({
             state.timezones = action.payload.timezones;
         }),
         setEvents: ((state, action: PayloadAction<{ events: IEvent[] }>) => {
-            state.events = action.payload.events;
+            if (state.isPublished) {
+                state.events = action.payload.events.filter(event => event.isPublished);
+            }else {
+                state.events=action.payload.events.filter(event=>!event.isPublished)
+            }
         }),
         addEvent: ((state, action: PayloadAction<{ event: IEvent }>) => {
             state.events.push(action.payload.event)
@@ -109,11 +113,9 @@ export const productSlice = createSlice({
             state.events[index] = action.payload.event
         }),
         setIsPublishedEvent: ((state, action) => {
-            state.isPublished=action.payload
+            state.isPublished = action.payload
         }),
-        EditEvent: ((state, action) => {
 
-        }),
     },
     extraReducers: {
         [getAllTimezones.rejected.toString()]: (state: any, action: PayloadAction<string>) => {
@@ -130,5 +132,5 @@ export const productSlice = createSlice({
 const recordReducer = productSlice.reducer;
 export default recordReducer;
 
-export const {setTimezones, setEvents, addEvent, deleteEvent, publishEvent, setIsPublishedEvent, EditEvent} = productSlice.actions;
+export const {setTimezones, setEvents, addEvent, deleteEvent, publishEvent, setIsPublishedEvent} = productSlice.actions;
 

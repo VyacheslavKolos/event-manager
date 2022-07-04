@@ -12,10 +12,10 @@ import EditIcon from '@mui/icons-material/Edit';
 //import {createProductThunk} from "../../store";
 import {useAppDispatch} from "../hooks";
 import {Box, MenuItem, Stack, Typography} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import {EditEventThunk} from "../store/slices";
+import {FC} from "react";
 
-const AddDialogWindow = () => {
+const EditEvent:FC<{id:number}> = ({id}) => {
 
 
     const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: "", time: ""}})
@@ -23,13 +23,11 @@ const AddDialogWindow = () => {
     const dispatch = useAppDispatch();
 
     const submit = (event: any) => {
-        const id = event.id;
         event.isPublished = false;
         if (
             event.title === '' || event.time === '') {
             alert("please enter some information")
         } else {
-            console.log(id);
             dispatch(EditEventThunk({id, event}))
         }
     }
@@ -87,4 +85,4 @@ const AddDialogWindow = () => {
     );
 };
 
-export default AddDialogWindow;
+export default EditEvent;
