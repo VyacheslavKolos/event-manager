@@ -5,6 +5,8 @@ import AddIcon from '@mui/icons-material/Add';
 import ActiveButton from "./ActiveButton";
 import InActiveButton from "./InActiveButton";
 import {AddDialogWindow} from "./AddDialogWindow";
+import {useAppDispatch} from "../hooks";
+import {setIsPublishedEvent} from "../store/slices";
 
 interface IProps {
     (bool: boolean): void;
@@ -15,10 +17,15 @@ const NavigationBarAndAddEvent : FC<{ setFilterPublished: IProps}> = ({setFilter
 
     const [isPublished, setIsPublished] = useState(true);
 
+    const dispatch = useAppDispatch();
+
     const changePublished = (bool: boolean) => {
         setIsPublished(bool);
         setFilterPublished(bool);
+        dispatch(setIsPublishedEvent(bool))
     }
+
+
 
 
     return (

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, Button, Card, CardActions, CardContent, Stack, Typography} from "@mui/material";
+import {Box, Card, CardActions, CardContent, Stack, Typography} from "@mui/material";
 import {IEvent} from "../interfaces";
 import CardMenu from "./CardMenu";
 
@@ -18,7 +18,7 @@ const EventCard: FC<{ event: IEvent }> = ({event}) => {
 
             <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} mr={'10px'}>
                 <CardActions>
-                    <CardMenu/>
+                    <CardMenu event={event}/>
                 </CardActions>
                 <Typography>
                     12:00 pm - 15 Sep 2022

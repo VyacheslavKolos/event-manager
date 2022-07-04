@@ -6,13 +6,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {useForm, Controller} from "react-hook-form";
+import EditIcon from '@mui/icons-material/Edit';
 
 
 //import {createProductThunk} from "../../store";
 import {useAppDispatch} from "../hooks";
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, MenuItem, Stack, Typography} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import {createEventThunk} from "../store/slices";
+import {EditEventThunk} from "../store/slices";
 
 const AddDialogWindow = () => {
 
@@ -22,13 +23,14 @@ const AddDialogWindow = () => {
     const dispatch = useAppDispatch();
 
     const submit = (event: any) => {
-        event.isPublished=false;
+        const id = event.id;
+        event.isPublished = false;
         if (
-            event.title === '' || event.time === '' ) {
+            event.title === '' || event.time === '') {
             alert("please enter some information")
-        }
-        else {
-            dispatch(createEventThunk({event}))
+        } else {
+            console.log(id);
+            dispatch(EditEventThunk({id, event}))
         }
     }
 
@@ -43,18 +45,11 @@ const AddDialogWindow = () => {
     };
 
     return (
-        <Box>
-            <Button onClick={handleClickOpen} variant="contained" color="success"
-                    sx={{width: '233px', height: '69px', bgcolor: '#4ADE80', borderRadius: '57px'}}>
-                <Stack alignItems={'center'} justifyContent={'center'} direction={'row'} gap={'20px'}>
-                    <AddIcon/>
-                    <Typography fontFamily={'Montserrat'} fontStyle={'normal'} fontWeight={600} fontSize={'24px'}
-                                color={'#FFFFFF'} lineHeight={'29px'} textTransform={'none'}>Add Event</Typography>
-                </Stack>
-            </Button>
+        <Box width={'120px'} height={'100%'}>
+            <MenuItem onClick={handleClickOpen} sx={{gap: '8px', pl: '4px'}}><EditIcon/>Edit</MenuItem>
             <Dialog open={open} onClose={handleClose}>
                 <form onSubmit={handleSubmit(submit)}>
-                    <DialogTitle>Add event</DialogTitle>
+                    <DialogTitle>Edit event</DialogTitle>
                     <DialogContent>
                         <Controller control={control} render={({field: {ref, ...field}}) => <TextField
                             {...field}
@@ -84,7 +79,7 @@ const AddDialogWindow = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button type={"submit"} onClick={handleClose}>Add</Button>
+                        <Button type={"submit"} onClick={handleClose}>Edit</Button>
                     </DialogActions>
                 </form>
             </Dialog>
@@ -92,4 +87,4 @@ const AddDialogWindow = () => {
     );
 };
 
-export {AddDialogWindow};
+export default AddDialogWindow;

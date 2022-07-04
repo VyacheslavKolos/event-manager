@@ -10,12 +10,17 @@ import {MenuItem} from "@mui/material";
 import {useAppDispatch} from "../hooks";
 import {deleteEventThunk} from "../store/slices";
 
+// @ts-ignore
+import DeleteIcon from '../assets/icons/DeleteIcon.png'
+
 
 interface IProps {
-    id: number
+    id: number;
+
 }
 
 const DeleteCard: FC<IProps> = ({id}) => {
+
 
     const dispatch = useAppDispatch();
 
@@ -36,7 +41,8 @@ const DeleteCard: FC<IProps> = ({id}) => {
 
     return (
         <div>
-            <MenuItem onClick={handleClickOpen} sx={{bgcolor: '#FF4A4A', color: '#FFFFFF'}}>Delete</MenuItem>
+            <MenuItem onClick={handleClickOpen} sx={{bgcolor: '#FF4A4A', color: '#FFFFFF', gap:'8px', pl:'4px'}}><img src={DeleteIcon}
+                                                                                                 alt={'delete icon'}/> Delete</MenuItem>
             <Dialog
                 open={open}
                 onClose={handleClose}
