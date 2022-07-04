@@ -23,7 +23,7 @@ const EventList: FC<{ filterPublished: boolean; }> = ({filterPublished}) => {
             setUnPublishedEvents(events.filter(e => !e.isPublished))
             setPublishedEvents([]);
         }
-    }, [filterPublished, events])
+    }, [filterPublished])
 
 
     return (

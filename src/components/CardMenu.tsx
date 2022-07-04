@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button, Menu, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import DeleteCard from "./DeleteCard";
+
 
 const CardMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -40,7 +42,8 @@ const CardMenu = () => {
             >
                 <MenuItem onClick={handleClose}>Edit</MenuItem>
                 <MenuItem onClick={handleClose}>Publish</MenuItem>
-                <MenuItem onClick={handleClose} sx={{bgcolor:'#FF4A4A', color:'#FFFFFF'}}>Delete</MenuItem>
+                {/*<MenuItem onClick={handleClose} sx={{bgcolor:'#FF4A4A', color:'#FFFFFF'}}>Delete</MenuItem>*/}
+                <DeleteCard id={3}/>
             </Menu>
         </div>);
 };

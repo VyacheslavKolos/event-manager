@@ -47,6 +47,16 @@ export const createEventThunk = createAsyncThunk<void, { event: IEvent }>(
     }
 )
 
+export const deleteEventThunk = createAsyncThunk<void, { id: number }>(
+    'recordSlice/deleteEventThunk',
+    async ({id}, {dispatch}) => {
+        await recordService.deleteById(id)
+        dispatch(deleteEvent({id}))
+        const {data} = await recordService.getAll()
+        dispatch(setEvents({events: data}))
+    }
+)
+
 
 export const productSlice = createSlice({
     name: 'recordSlice',
@@ -61,6 +71,9 @@ export const productSlice = createSlice({
         addEvent: ((state, action: PayloadAction<{ event: IEvent }>) => {
             state.events.push(action.payload.event)
         }),
+        deleteEvent: ((state, action) => {
+            state.events.filter(event => event.id !== action.payload.id)
+        })
     },
     extraReducers: {
         [getAllTimezones.rejected.toString()]: (state: any, action: PayloadAction<string>) => {
@@ -77,5 +90,5 @@ export const productSlice = createSlice({
 const recordReducer = productSlice.reducer;
 export default recordReducer;
 
-export const {setTimezones, setEvents, addEvent} = productSlice.actions;
+export const {setTimezones, setEvents, addEvent, deleteEvent} = productSlice.actions;
 
