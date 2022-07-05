@@ -12,23 +12,27 @@ import EditIcon from '@mui/icons-material/Edit';
 //import {createProductThunk} from "../../store";
 import {useAppDispatch} from "../hooks";
 import {Box, MenuItem, Stack, Typography} from "@mui/material";
-import {EditEventThunk} from "../store/slices";
+import {createEventThunk, EditEventThunk} from "../store/slices";
 import {FC} from "react";
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 const EditEvent:FC<{id:number}> = ({id}) => {
 
 
-    const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: "", time: ""}})
+    const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: ""}})
 
     const dispatch = useAppDispatch();
 
     const submit = (event: any) => {
         event.isPublished = false;
+        event.time = value;
         if (
             event.title === '' || event.time === '') {
             alert("please enter some information")
         } else {
-            dispatch(EditEventThunk({id, event}))
+            console.log(event);
+            dispatch(EditEventThunk({id,event}))
         }
     }
 
@@ -42,6 +46,10 @@ const EditEvent:FC<{id:number}> = ({id}) => {
         setOpen(false);
     };
 
+    const [value, setValue] = React.useState<Date | null>(new Date());
+
+
+
     return (
         <Box width={'120px'} height={'100%'}>
             <MenuItem onClick={handleClickOpen} sx={{gap: '8px', pl: '4px'}}><EditIcon/>Edit</MenuItem>
@@ -49,35 +57,37 @@ const EditEvent:FC<{id:number}> = ({id}) => {
                 <form onSubmit={handleSubmit(submit)}>
                     <DialogTitle>Edit event</DialogTitle>
                     <DialogContent>
-                        <Controller control={control} render={({field: {ref, ...field}}) => <TextField
-                            {...field}
-                            inputRef={ref}
-                            autoFocus
-                            margin="dense"
-                            id="title"
-                            label="Event description"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                        />} name={"title"}
-                        />
-                        <Controller control={control} render={({field: {ref, ...field}}) => <TextField
-                            {...field}
-                            inputRef={ref}
-                            autoFocus
-                            margin="dense"
-                            id="time"
-                            label="Time"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                        />} name={"time"}
-                        />
+
+                        <Stack width={'300px'} gap={'30px'}>
+                            <Controller control={control} render={({field: {ref, ...field}}) => <TextField
+                                {...field}
+                                inputRef={ref}
+                                autoFocus
+                                margin="dense"
+                                id="title"
+                                label="Event description"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                            />} name={"title"}
+                            />
+
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
+                                    label="Select date and time"
+                                    value={value}
+                                    onChange={(newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                />
+                            </LocalizationProvider>
+                        </Stack>
 
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button type={"submit"} onClick={handleClose}>Edit</Button>
+                        <Button type={"submit"} onClick={handleClose}>Add</Button>
                     </DialogActions>
                 </form>
             </Dialog>

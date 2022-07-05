@@ -28,7 +28,7 @@ const AddDialogWindow = () => {
 
     const submit = (event: any) => {
         event.isPublished = false;
-        event.time=value;
+        event.time = value;
         if (
             event.title === '' || event.time === '') {
             alert("please enter some information")
@@ -68,22 +68,22 @@ const AddDialogWindow = () => {
 
                         <Stack width={'300px'} gap={'30px'}>
                             <Controller control={control} render={({field: {ref, ...field}}) => <TextField
-                            {...field}
-                            inputRef={ref}
-                            autoFocus
-                            margin="dense"
-                            id="title"
-                            label="Event description"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                        />} name={"title"}
-                        />
+                                {...field}
+                                inputRef={ref}
+                                autoFocus
+                                margin="dense"
+                                id="title"
+                                label="Event description"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                            />} name={"title"}
+                            />
 
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DateTimePicker
                                     renderInput={(props) => <TextField {...props} />}
-                                    label="DateTimePicker"
+                                    label="Select date and time"
                                     value={value}
                                     onChange={(newValue) => {
                                         setValue(newValue);
