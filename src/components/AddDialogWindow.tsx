@@ -14,20 +14,26 @@ import {Box, Stack, Typography} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import {createEventThunk} from "../store/slices";
 
+
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+
+
 const AddDialogWindow = () => {
 
 
-    const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: "", time: ""}})
+    const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: ""}})
 
     const dispatch = useAppDispatch();
 
     const submit = (event: any) => {
-        event.isPublished=false;
+        event.isPublished = false;
+        event.time=value;
         if (
-            event.title === '' || event.time === '' ) {
+            event.title === '' || event.time === '') {
             alert("please enter some information")
-        }
-        else {
+        } else {
+            console.log(event);
             dispatch(createEventThunk({event}))
         }
     }
@@ -41,6 +47,9 @@ const AddDialogWindow = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const [value, setValue] = React.useState<Date | null>(new Date());
+
 
     return (
         <Box>
@@ -56,7 +65,9 @@ const AddDialogWindow = () => {
                 <form onSubmit={handleSubmit(submit)}>
                     <DialogTitle>Add event</DialogTitle>
                     <DialogContent>
-                        <Controller control={control} render={({field: {ref, ...field}}) => <TextField
+
+                        <Stack width={'300px'} gap={'30px'}>
+                            <Controller control={control} render={({field: {ref, ...field}}) => <TextField
                             {...field}
                             inputRef={ref}
                             autoFocus
@@ -68,18 +79,18 @@ const AddDialogWindow = () => {
                             variant="standard"
                         />} name={"title"}
                         />
-                        <Controller control={control} render={({field: {ref, ...field}}) => <TextField
-                            {...field}
-                            inputRef={ref}
-                            autoFocus
-                            margin="dense"
-                            id="time"
-                            label="Time"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                        />} name={"time"}
-                        />
+
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
+                                    label="DateTimePicker"
+                                    value={value}
+                                    onChange={(newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                />
+                            </LocalizationProvider>
+                        </Stack>
 
                     </DialogContent>
                     <DialogActions>
