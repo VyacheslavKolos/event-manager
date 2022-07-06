@@ -22,4 +22,4 @@ const ActiveButton: FC<{ changePublished: IProps, name: string }> = ({changePubl
     );
 };
 
-export default ActiveButton;
+export {ActiveButton};

@@ -7,17 +7,18 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {FC} from "react";
 import {MenuItem} from "@mui/material";
-import {useAppDispatch} from "../hooks";
-import {deleteEventThunk} from "../store/slices";
+
+import {useAppDispatch} from "../../hooks";
+import {deleteEventThunk} from "../../store/slices";
 
 // @ts-ignore
-import DeleteIcon from '../assets/icons/DeleteIcon.png'
-
+import DeleteIcon from '../../assets/icons/DeleteIcon.png'
 
 interface IProps {
     id: number;
 
 }
+
 
 const DeleteCard: FC<IProps> = ({id}) => {
 
@@ -68,4 +69,4 @@ const DeleteCard: FC<IProps> = ({id}) => {
     );
 };
 
-export default DeleteCard;
+export  {DeleteCard};

@@ -7,20 +7,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {useForm, Controller} from "react-hook-form";
 
-
-//import {createProductThunk} from "../../store";
-import {useAppDispatch} from "../hooks";
 import {Box, Stack, Typography} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import {createEventThunk} from "../store/slices";
-
-
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
+import {useAppDispatch} from "../../hooks";
+import {createEventThunk} from "../../store/slices";
+
 
 const AddDialogWindow = () => {
-
 
     const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: ""}})
 

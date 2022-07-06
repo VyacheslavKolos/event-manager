@@ -2,12 +2,11 @@ import React, {FC} from 'react';
 import {Stack, Typography} from "@mui/material";
 
 // @ts-ignore
-import earthIcon from '../assets/icons/Vector_Stroke.png';
-import TimezoneList from "./TimezoneList";
+import earthIcon from '../../assets/icons/Vector_Stroke.png';
+import {TimezoneList} from "../../components";
+
 
 const Navbar: FC = () => {
-
-
     return (
         <div>
             <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
@@ -24,7 +23,6 @@ const Navbar: FC = () => {
                         Select Timezone
                     </Typography>
 
-
                     <TimezoneList/>
 
                 </Stack>
@@ -34,4 +32,4 @@ const Navbar: FC = () => {
     );
 };
 
-export default Navbar;
+export  {Navbar};

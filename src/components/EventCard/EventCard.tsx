@@ -1,18 +1,13 @@
 import React, {FC} from 'react';
 import {Box, Card, CardActions, CardContent, Stack, Typography} from "@mui/material";
-import {IEvent} from "../interfaces";
-import CardMenu from "./CardMenu";
-import moment from "moment";
 import {formatInTimeZone} from 'date-fns-tz'
-import {useAppSelector} from "../hooks";
+
+import {IEvent} from "../../interfaces";
+import {useAppSelector} from "../../hooks";
+import {CardMenu} from "../../components";
 
 
 const EventCard: FC<{ event: IEvent }> = ({event}) => {
-
-
-    // let date = moment(event.time);
-    // console.log(date);
-    // let formattedDate = date.format('MMMM Do YYYY, h:mm a').split(',').reverse().join().replace(',', ' - ');
 
     const {SelectedTimezone} = useAppSelector(state => state.recordReducer)
 
@@ -46,7 +41,7 @@ const EventCard: FC<{ event: IEvent }> = ({event}) => {
     );
 };
 
-export default EventCard;
+export {EventCard};
 
 
 

@@ -1,18 +1,14 @@
-import React, {FC, useState} from 'react';
-import {Box, Stack, Typography} from "@mui/material";
-import Button from "@mui/material/Button";
-import AddIcon from '@mui/icons-material/Add';
-import ActiveButton from "./ActiveButton";
-import InActiveButton from "./InActiveButton";
-import {AddDialogWindow} from "./AddDialogWindow";
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {setIsPublishedEvent} from "../store/slices";
+import React from 'react';
+import {Box, Stack} from "@mui/material";
+
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {setIsPublishedEvent} from "../../store/slices";
+import {InActiveButton, ActiveButton, AddDialogWindow} from "../../components";
 
 
 const NavigationBarAndAddEvent = () => {
 
     const {isPublished} = useAppSelector(state => state.recordReducer)
-
 
     const dispatch = useAppDispatch();
 
@@ -24,7 +20,6 @@ const NavigationBarAndAddEvent = () => {
 
     return (
         <Box mt={'30px'}>
-
 
             <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Stack justifyContent={'center'} width={'557px'} height={'71px'} borderRadius={'47px'}
@@ -45,7 +40,6 @@ const NavigationBarAndAddEvent = () => {
                             }
                         </Box>
 
-
                     </Stack>
                 </Stack>
 
@@ -53,9 +47,8 @@ const NavigationBarAndAddEvent = () => {
 
             </Stack>
 
-
         </Box>
     );
 };
 
-export default NavigationBarAndAddEvent;
+export  {NavigationBarAndAddEvent};

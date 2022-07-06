@@ -6,28 +6,28 @@ import MenuItem from '@mui/material/MenuItem';
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 import {Stack, Typography} from "@mui/material";
 
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {getAllTimezones, SetSelectedTimezone} from "../store/slices";
-import {ITimezone} from "../interfaces";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getAllTimezones, SetSelectedTimezone} from "../../store/slices";
+import {ITimezone} from "../../interfaces";
 
 
 const TimezoneList = () => {
 
     const dispatch = useAppDispatch();
 
-    const {timezones,SelectedTimezone} = useAppSelector(state => state.recordReducer)
+    const {timezones} = useAppSelector(state => state.recordReducer)
 
     useEffect(() => {
         dispatch(getAllTimezones())
     }, [])
 
 
-    const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(timezones[0]|| {
+    const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(timezones[0] || {
         id: 0,
         name: 'Eastern Time - EDT',
         value: "America/New_York",
         offset: "GMT-0400"
-    } );
+    });
 
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -44,7 +44,6 @@ const TimezoneList = () => {
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
-
 
     return (
         <Stack direction={'row'} alignItems={'center'} border={'1.5px solid #000000'} borderRadius={'5px'}
@@ -84,4 +83,4 @@ const TimezoneList = () => {
     );
 }
 
-export default TimezoneList;
+export {TimezoneList};

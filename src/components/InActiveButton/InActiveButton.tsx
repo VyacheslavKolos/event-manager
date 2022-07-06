@@ -23,4 +23,4 @@ const InActiveButton : FC<{ changePublished: IProps ,status:boolean, name:string
     );
 };
 
-export default InActiveButton;
+export  {InActiveButton};

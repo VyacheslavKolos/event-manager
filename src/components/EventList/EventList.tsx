@@ -1,8 +1,9 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Box, Stack} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {getAllEvents} from "../store/slices";
-import EventCard from "./EventCard";
+
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getAllEvents} from "../../store/slices";
+import {EventCard} from "../../components";
 
 const EventList = () => {
 
@@ -27,4 +28,4 @@ const EventList = () => {
     );
 };
 
-export default EventList;
+export  {EventList};

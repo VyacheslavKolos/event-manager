@@ -7,15 +7,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {useForm, Controller} from "react-hook-form";
 import EditIcon from '@mui/icons-material/Edit';
-
-
-//import {createProductThunk} from "../../store";
-import {useAppDispatch} from "../hooks";
 import {Box, MenuItem, Stack} from "@mui/material";
-import { EditEventThunk} from "../store/slices";
 import {FC} from "react";
-import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {useAppDispatch} from "../../hooks";
+import {EditEventThunk} from "../../store/slices";
+
 
 const EditEvent:FC<{id:number}> = ({id}) => {
 
@@ -94,4 +93,4 @@ const EditEvent:FC<{id:number}> = ({id}) => {
     );
 };
 
-export default EditEvent;
+export  {EditEvent};

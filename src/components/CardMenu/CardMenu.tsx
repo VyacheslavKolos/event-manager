@@ -1,17 +1,15 @@
 import React, {FC} from 'react';
 import {Button, Menu, Stack, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import DeleteCard from "./DeleteCard";
-
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {PublishEventThunk} from "../store/slices";
-import {IEvent} from "../interfaces";
-
-import EditEvent from "./EditEvent";
 import PublishIcon from '@mui/icons-material/Publish';
 
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {PublishEventThunk} from "../../store/slices";
+import {IEvent} from "../../interfaces";
+
 // @ts-ignore
-import Unpublish from '../assets/icons/UnPublishIcon.png';
+import Unpublish from '../../assets/icons/UnPublishIcon.png';
+import {EditEvent, DeleteCard} from "../../components";
 
 interface IProps {
     event: IEvent
@@ -76,7 +74,7 @@ const CardMenu: FC<IProps> = ({event}) => {
         </div>);
 };
 
-export default CardMenu;
+export {CardMenu};
 
 
 
