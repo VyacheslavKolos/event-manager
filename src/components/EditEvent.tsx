@@ -11,14 +11,13 @@ import EditIcon from '@mui/icons-material/Edit';
 
 //import {createProductThunk} from "../../store";
 import {useAppDispatch} from "../hooks";
-import {Box, MenuItem, Stack, Typography} from "@mui/material";
-import {createEventThunk, EditEventThunk} from "../store/slices";
+import {Box, MenuItem, Stack} from "@mui/material";
+import { EditEventThunk} from "../store/slices";
 import {FC} from "react";
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 const EditEvent:FC<{id:number}> = ({id}) => {
-
 
     const {handleSubmit, control} = useForm({mode: "onChange", defaultValues: {title: ""}})
 
