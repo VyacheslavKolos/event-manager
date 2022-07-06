@@ -29,7 +29,6 @@ const TimezoneList = () => {
         offset: "GMT-0400"
     } );
 
-    console.log(SelectedTimezone);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
