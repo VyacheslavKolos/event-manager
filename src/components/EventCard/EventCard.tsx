@@ -11,8 +11,6 @@ const EventCard: FC<{ event: IEvent }> = ({event}) => {
 
     const {SelectedTimezone} = useAppSelector(state => state.recordReducer)
 
-    console.log(SelectedTimezone.value);
-
     let date = formatInTimeZone(event.time, SelectedTimezone.value, 'MMMM do yyyy, h:mm a')
         .split(',').reverse().join().replace(',', ' - ');
 

@@ -17,8 +17,12 @@ const EventList = () => {
 
 
     return (
-        <Box mt={'44px'}>
-            <Stack direction={'row'} flexWrap={'wrap'} gap={'82px'}>
+        <Box sx={{mt: {lg: '44px', xs: '18px'}}}>
+            <Stack flexWrap={'wrap'} sx={{
+                gap: {lg: '82px', xs: '20px'},
+                flexDirection: {lg: 'row', xs: 'column'},
+                alignItems: {xs: 'center'}
+            }}>
 
                 {events.map(event => (
                     <EventCard key={event.id} event={event}/>
@@ -28,4 +32,4 @@ const EventList = () => {
     );
 };
 
-export  {EventList};
+export {EventList};

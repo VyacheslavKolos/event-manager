@@ -48,9 +48,9 @@ const AddDialogWindow = () => {
 
 
     return (
-        <Box>
+        <Box sx={{position: {lg: 'static', xs: 'fixed'}, bottom: {xs: '0'}, left: {xs: '5%'}, zIndex: {xs: '999'}, mb:{xs:'10px'}}}>
             <Button onClick={handleClickOpen} variant="contained" color="success"
-                    sx={{width: '233px', height: '69px', bgcolor: '#4ADE80', borderRadius: '57px'}}>
+                    sx={{width: {lg: '233px', xs: '350px'}, height: '69px', bgcolor: '#4ADE80', borderRadius: '57px'}}>
                 <Stack alignItems={'center'} justifyContent={'center'} direction={'row'} gap={'20px'}>
                     <AddIcon/>
                     <Typography fontFamily={'Montserrat'} fontStyle={'normal'} fontWeight={600} fontSize={'24px'}

@@ -12,9 +12,10 @@ const InActiveButton : FC<{ changePublished: IProps ,status:boolean, name:string
         <Button variant="text"
                 onClick={() => changePublished(status)}
                 sx={{
-                    width: '233px',
+                    width: {lg:'233px',xs:'328px'},
                     height: '46px',
-                    color: '#000000'
+                    color: '#000000',
+
                 }}><Typography fontFamily={'Montserrat'} fontStyle={'normal'}
                                fontWeight={600}
                                fontSize={'24px'}

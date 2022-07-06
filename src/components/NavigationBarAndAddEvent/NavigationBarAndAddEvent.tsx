@@ -17,14 +17,22 @@ const NavigationBarAndAddEvent = () => {
     }
 
 
-
     return (
-        <Box mt={'30px'}>
+        <Box mt={'30px'} >
 
-            <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Stack justifyContent={'center'} width={'557px'} height={'71px'} borderRadius={'47px'}
-                       bgcolor={'#E9E9E9'}>
-                    <Stack direction={'row'} gap={'30px'} alignItems={'center'} justifyContent={'center'}>
+            <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} sx={{justifyContent:{lg:'space-between', xs:'center'}}}>
+                <Stack justifyContent={'center'}
+                       bgcolor={'#E9E9E9'} sx={{
+                    width: {lg: '557px', xs: '357px'},
+                    height: {lg: '71px', xs: '132px'},
+                    borderRadius: {lg: '47px', xs: '18px'}
+                }}>
+                    <Stack alignItems={'center'} justifyContent={'center'} sx={{
+                        flexDirection: {lg: 'row', xs: 'column'},
+                        gap: {lg: '30px', xs: '16px'},
+                        height: {lg: '71px', xs: '132px'},
+                        width: {lg: '557px', xs: '357px'}
+                    }}>
 
                         <Box>
                             {isPublished ? <ActiveButton changePublished={changePublished} name={'Published'}/> :
@@ -43,7 +51,9 @@ const NavigationBarAndAddEvent = () => {
                     </Stack>
                 </Stack>
 
-                <AddDialogWindow/>
+                <Box>
+                    <AddDialogWindow/>
+                </Box>
 
             </Stack>
 
@@ -51,4 +61,4 @@ const NavigationBarAndAddEvent = () => {
     );
 };
 
-export  {NavigationBarAndAddEvent};
+export {NavigationBarAndAddEvent};
