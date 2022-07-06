@@ -7,35 +7,45 @@ import {ExpandLess, ExpandMore} from "@mui/icons-material";
 import {Stack, Typography} from "@mui/material";
 
 import {useAppDispatch, useAppSelector} from "../hooks";
-import {getAllTimezones} from "../store/slices";
+import {getAllTimezones, SetSelectedTimezone} from "../store/slices";
+import {ITimezone} from "../interfaces";
 
 
 const TimezoneList = () => {
 
     const dispatch = useAppDispatch();
 
-    const {timezones, errors} = useAppSelector(state => state.recordReducer)
+    const {timezones,SelectedTimezone} = useAppSelector(state => state.recordReducer)
 
     useEffect(() => {
         dispatch(getAllTimezones())
     }, [])
 
 
-    const [selectedTimezone, setSelectedTimezone] = useState('');
+    const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(timezones[0]|| {
+        id: 0,
+        name: 'Eastern Time - EDT',
+        value: "America/New_York",
+        offset: "GMT-0400"
+    } );
+
+    console.log(SelectedTimezone);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleCloseMenuItem = (name: string) => {
-        setSelectedTimezone(name);
+    const handleCloseMenuItem = (tmzone: ITimezone) => {
+        setSelectedTimezone(tmzone);
         setAnchorEl(null);
+        dispatch(SetSelectedTimezone(tmzone))
     };
 
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
+
 
     return (
         <Stack direction={'row'} alignItems={'center'} border={'1.5px solid #000000'} borderRadius={'5px'}
@@ -51,7 +61,7 @@ const TimezoneList = () => {
                 {open ? <ExpandLess/> : <ExpandMore/>}
                 <Typography fontFamily={'Montserrat'} fontStyle={'normal'} fontWeight={500} fontSize={'17px'}
                             color={'#000000'} lineHeight={'22px'} width={'230px'}>
-                    {selectedTimezone ? selectedTimezone : timezones[0]?.name}
+                    {selectedTimezone.name}
                 </Typography>
             </Button>
             <Menu
@@ -65,7 +75,7 @@ const TimezoneList = () => {
             >
 
                 {timezones.map((timezone) => (
-                    <MenuItem key={timezone.id} onClick={() => handleCloseMenuItem(timezone.name)}
+                    <MenuItem key={timezone.id} onClick={() => handleCloseMenuItem(timezone)}
                               sx={{width: '270px'}}>
                         {timezone.name}
                     </MenuItem>

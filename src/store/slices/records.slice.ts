@@ -6,7 +6,8 @@ import {recordService} from "../../services";
 interface IRecordsState {
     timezones: ITimezone[],
     events: IEvent[],
-    isPublished: boolean
+    isPublished: boolean,
+    SelectedTimezone: ITimezone,
     errors: object,
 }
 
@@ -14,6 +15,12 @@ const initialState: IRecordsState = {
     timezones: [],
     events: [],
     isPublished: false,
+    SelectedTimezone: {
+        id: 0,
+        name: 'Eastern Time - EDT',
+        value: "America/New_York",
+        offset: "GMT-0400"
+    },
     errors: []
 }
 
@@ -98,8 +105,8 @@ export const productSlice = createSlice({
         setEvents: ((state, action: PayloadAction<{ events: IEvent[] }>) => {
             if (state.isPublished) {
                 state.events = action.payload.events.filter(event => event.isPublished);
-            }else {
-                state.events=action.payload.events.filter(event=>!event.isPublished)
+            } else {
+                state.events = action.payload.events.filter(event => !event.isPublished)
             }
         }),
         addEvent: ((state, action: PayloadAction<{ event: IEvent }>) => {
@@ -114,6 +121,9 @@ export const productSlice = createSlice({
         }),
         setIsPublishedEvent: ((state, action) => {
             state.isPublished = action.payload
+        }),
+        SetSelectedTimezone: ((state, action) => {
+            state.SelectedTimezone = action.payload
         }),
 
     },
@@ -132,5 +142,13 @@ export const productSlice = createSlice({
 const recordReducer = productSlice.reducer;
 export default recordReducer;
 
-export const {setTimezones, setEvents, addEvent, deleteEvent, publishEvent, setIsPublishedEvent} = productSlice.actions;
+export const {
+    setTimezones,
+    setEvents,
+    addEvent,
+    deleteEvent,
+    publishEvent,
+    setIsPublishedEvent,
+    SetSelectedTimezone
+} = productSlice.actions;
 

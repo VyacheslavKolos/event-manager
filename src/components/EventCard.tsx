@@ -5,7 +5,6 @@ import CardMenu from "./CardMenu";
 import moment from "moment";
 
 const EventCard: FC<{ event: IEvent }> = ({event}) => {
-    console.log(event);
 
     let date = moment(event.time);
     let formattedDate = date.format('MMMM Do YYYY, h:mm a').split(',').reverse().join().replace(',', ' - ');
