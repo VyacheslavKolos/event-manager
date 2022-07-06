@@ -2,8 +2,15 @@ import React, {FC} from 'react';
 import {Box, Card, CardActions, CardContent, Stack, Typography} from "@mui/material";
 import {IEvent} from "../interfaces";
 import CardMenu from "./CardMenu";
+import moment from "moment";
 
 const EventCard: FC<{ event: IEvent }> = ({event}) => {
+    console.log(event);
+
+    let date = moment(event.time);
+    let formattedDate = date.format('MMMM Do YYYY, h:mm a').split(',').reverse().join().replace(',', ' - ');
+
+
     return (
         <Card variant={'outlined'} sx={{width: '285px', height: '148px', borderRadius: '15px', bgcolor: '#E9E9E9'}}>
             <CardContent>
@@ -21,7 +28,7 @@ const EventCard: FC<{ event: IEvent }> = ({event}) => {
                     <CardMenu event={event}/>
                 </CardActions>
                 <Typography>
-                    12:00 pm - 15 Sep 2022
+                    {formattedDate}
                 </Typography>
             </Stack>
 
