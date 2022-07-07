@@ -1,1 +1,1 @@
-export * from './records.slice';
+export * from './event.slice';

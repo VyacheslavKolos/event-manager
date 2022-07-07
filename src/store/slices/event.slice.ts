@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {IEvent, ITimezone} from "../../interfaces";
-import {recordService} from "../../services";
+import {eventService} from "../../services";
 
 interface IRecordsState {
     timezones: ITimezone[],
@@ -28,7 +28,7 @@ export const getAllTimezones = createAsyncThunk(
     'recordSlice/getAllTimezones',
     async (_, {dispatch, rejectWithValue}) => {
         try {
-            const {data} = await recordService.getAllTimezones()
+            const {data} = await eventService.getAllTimezones()
             dispatch(setTimezones({timezones: data}))
         } catch (e: any) {
             return rejectWithValue(e.message);
@@ -40,7 +40,7 @@ export const getAllEvents = createAsyncThunk(
     'recordSlice/getAllEvents',
     async (_, {dispatch, rejectWithValue}) => {
         try {
-            const {data} = await recordService.getAll()
+            const {data} = await eventService.getAll()
             dispatch(setEvents({events: data}))
         } catch (e: any) {
             return rejectWithValue(e.message);
@@ -51,7 +51,7 @@ export const getAllEvents = createAsyncThunk(
 export const createEventThunk = createAsyncThunk<void, { event: IEvent }>(
     'recordSlice/createEventThunk',
     async ({event}, {dispatch}) => {
-        const {data} = await recordService.create(event);
+        const {data} = await eventService.create(event);
         dispatch(addEvent({event: data}))
     }
 )
@@ -59,9 +59,9 @@ export const createEventThunk = createAsyncThunk<void, { event: IEvent }>(
 export const deleteEventThunk = createAsyncThunk<void, { id: number }>(
     'recordSlice/deleteEventThunk',
     async ({id}, {dispatch}) => {
-        await recordService.deleteById(id)
+        await eventService.deleteById(id)
         dispatch(deleteEvent({id}))
-        const {data} = await recordService.getAll()
+        const {data} = await eventService.getAll()
         dispatch(setEvents({events: data}))
     }
 )
@@ -75,7 +75,7 @@ export const PublishEventThunk = createAsyncThunk<void, { id: number, event: IEv
             isPublished: !event.isPublished,
             id
         }
-        await recordService.publishEvent(id, newEvent)
+        await eventService.publishEvent(id, newEvent)
         dispatch(publishEvent({event: newEvent}))
     }
 )
@@ -90,7 +90,7 @@ export const EditEventThunk = createAsyncThunk<void, { id: number, event: IEvent
             id
         }
         console.log(newEvent);
-        await recordService.editEvent(id, newEvent)
+        await eventService.editEvent(id, newEvent)
         dispatch(publishEvent({event: newEvent}))
     }
 )

@@ -1,5 +1,5 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import recordReducer from "./slices/records.slice";
+import recordReducer from "./slices/event.slice";
 
 
 
